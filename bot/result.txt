@@ -1,0 +1,60 @@
+Game 0
+Gene1: {"Turn":100,"Float":0.0,"String":"P1"}
+Gene2: {"Turn":100,"Float":1.0,"String":"P2"}
+Tie!
+{0=0, 1=0}
+
+Game 1
+Gene1: {"Turn":100,"Float":0.0,"String":"P1"}
+Gene2: {"Turn":100,"Float":1.0,"String":"P2"}
+Tie!
+{0=0, 1=0}
+
+Game 2
+Gene1: {"Turn":100,"Float":0.0,"String":"P1"}
+Gene2: {"Turn":100,"Float":1.0,"String":"P2"}
+Tie!
+{0=0, 1=0}
+
+Game 3
+Gene1: {"Turn":100,"Float":0.0,"String":"P1"}
+Gene2: {"Turn":100,"Float":1.0,"String":"P2"}
+Tie!
+{0=0, 1=0}
+
+Game 4
+Gene1: {"Turn":100,"Float":0.0,"String":"P1"}
+Gene2: {"Turn":100,"Float":1.0,"String":"P2"}
+Tie!
+{0=0, 1=0}
+
+Game 5
+Gene1: {"Turn":100,"Float":0.0,"String":"P1"}
+Gene2: {"Turn":100,"Float":1.0,"String":"P2"}
+Tie!
+{0=0, 1=0}
+
+Game 6
+Gene1: {"Turn":100,"Float":0.0,"String":"P1"}
+Gene2: {"Turn":100,"Float":1.0,"String":"P2"}
+Tie!
+{0=0, 1=0}
+
+Game 7
+Gene1: {"Turn":100,"Float":0.0,"String":"P1"}
+Gene2: {"Turn":100,"Float":1.0,"String":"P2"}
+Tie!
+{0=0, 1=0}
+
+Game 8
+Gene1: {"Turn":100,"Float":0.0,"String":"P1"}
+Gene2: {"Turn":100,"Float":1.0,"String":"P2"}
+Tie!
+{0=0, 1=0}
+
+Game 9
+Gene1: {"Turn":100,"Float":0.0,"String":"P1"}
+Gene2: {"Turn":100,"Float":1.0,"String":"P2"}
+Tie!
+{0=0, 1=0}
+
