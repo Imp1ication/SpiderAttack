@@ -14,8 +14,8 @@ import javassist.bytecode.analysis.Subroutine;
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
     // agents compile setting
-    	String agent1 = compileCpp("MyBot/SpiderAttack/main.cpp", "P1");
-    	String agent2 = compileCpp("MyBot/SpiderAttack/main2.cpp", "P2"); // compileCpp("MyBot/SpiderAttack/main2.cpp", "P2");
+    	String agent1 = compileCpp("bot/main.cpp", "P1");
+    	String agent2 = compileCpp("bot/main2.cpp", "P2"); 
     	
     	EAGeneBean gene1 = new EAGeneBean(100, 0f, "P1");
     	EAGeneBean gene2 = new EAGeneBean(100, 1f, "P2");
@@ -24,7 +24,7 @@ public class Main {
     	JsonObject jene2 = gene2.getJsonObject();
 					
     // init data file
-        FileWriter result_writer = new FileWriter("MyBot/SpiderAttack/result.txt");
+        FileWriter result_writer = new FileWriter("bot/result.txt");
 		result_writer.write("");
 		
 	// Loop	
@@ -34,8 +34,8 @@ public class Main {
         	long time = System.currentTimeMillis();
         	
         // write gene data to file
-        	FileWriter P1_writer = new FileWriter("MyBot/SpiderAttack/data.json");
-        	FileWriter P2_writer = new FileWriter("MyBot/SpiderAttack/data2.json");
+        	FileWriter P1_writer = new FileWriter("bot/data.json");
+        	FileWriter P2_writer = new FileWriter("bot/data2.json");
         	P1_writer.flush();
 			P1_writer.write(jene1.toString());
         	P1_writer.close();
