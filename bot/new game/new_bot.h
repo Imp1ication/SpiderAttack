@@ -128,8 +128,8 @@ public:
 
 class Hero : public Entity{
 private:
-	Position patrolPost_;
-
+	Position patrolPos_[2];
+    int patrolTar_ = -1;     // -1: error unset, 0: pos1, 1: pos2
 public:
 	Hero(int id, int type) : Entity(id, type) {}
 
@@ -137,17 +137,32 @@ public:
 	bool inRangeShield(const Position& p) const{ return pos_.distance(p) <= 2200; }
 	bool inRangeControl(const Position& p) const{ return pos_.distance(p) <= 2200; }
 	
-    void setPatrol(Position pos){ patrolPost_ = pos; }
-    Position getPatrol() const { return patrolPost_; }
+    void setPatrol(Position pos1, Position pos2) { patrolPos_[0] = pos1; patrolPos_[1] = pos2; patrolTar_ = 0; }
 	
 /* Movement */ 
 // TODO: set Patrol system
-    void Patrol(std::string msg = "") const {
+    void Patrol(std::string msg = ""){
+        if(patrolTar_ == -1) {
+            printErr("Error: No patrol pos!");
+            return;
+        }
+        
+        if(this->getPos() == patrolPos_[patrolTar_]){
+            patrolTar_ = (patrolTar_ + 1) % 2;
+        }
 
+        std::cout << "MOVE " << patrolPos_[patrolTar_] << " " << "patrol" << std::endl;
+        
+    // build msg
+        std::string log = "Patrol: " + patrolPos_[patrolTar_].toString();  
+        
+        if(msg != "") { log = log + " // " + msg; }
+        printErr(log);
+
+        return;
     }
 
     void Move(Position p, std::string msg = ""){ std::cout << "MOVE " << p << " " << msg << std::endl;}
-	// void Patrol(std::string msg = "") const { std::cout << "MOVE " << patrolPost_ << " " << msg << std::endl; }
 	void Wind(Position dir){ std::cout << "SPELL WIND " << dir << std::endl; }
 	void Control(Entity target, Position dir) { std::cout << "SPELL CONTROL " << std::to_string(target.getId()) << " " << dir << std::endl; }
 	void Shield(Entity target){ std::cout << "SPELL SHIELD " << std::to_string(target.getId()) << std::endl; }

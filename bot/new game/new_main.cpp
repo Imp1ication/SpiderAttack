@@ -59,16 +59,31 @@ int main()
         totalThreat = TS.getTotalThreaten(myThreat);
 
     /* attacker */
+    // attacker setup
         Hero atk = myHero[0];
+        Position huntPos1 = GM.posTrans(myBase, Position(GameManager::MAP_WIDTH-Base::VIEW_RANGE-2200, GameManager::MAP_HEIGHT-1500)),
+                 huntPos2 = GM.posTrans(myBase, Position(GameManager::MAP_WIDTH-Base::VIEW_RANGE-2200*3, GameManager::MAP_HEIGHT-1500));
+        atk.setPatrol(huntPos1, huntPos2);
 
+        vector<Monster> nearAtkMons;
+        for(Monster mon : mons){
+            if( atk.distance(mon.getPos()) <= 2200 ){
+                nearAtkMons.push_back(mon);
+            }
+        }
+    
+    // Movement condition
         if(totalThreat > GM.getDefThreat()){
-            // defend
+        // defend
         } else if(GM.getTurn() > GM.getAtkTurn() && myBase.getMana() > GM.getAtkMana()){
-            // attack
-        } else if(0){
-            // hunt
-        } else{ // patrol
+        // attack
+        } else if( !nearAtkMons.empty() ){ 
+        // hunt
             
+            
+        } else{ 
+        // patrol
+            atk.Patrol();            
         }
         
 
