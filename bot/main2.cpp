@@ -22,7 +22,7 @@ enum Motion {
 
 int main()
 {
-    ifstream inf("/home/implication/eclipse-workspace/SpringChallenge2022-main/MyBot/SpiderAttack/data2.json");
+    ifstream inf("/home/implication/eclipse-workspace/SpringChallenge2022-main/bot/data2.json");
     json j;
     inf >> j;
     inf.close();

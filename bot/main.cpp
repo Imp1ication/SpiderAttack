@@ -23,7 +23,7 @@ enum Motion {
 int main()
 {
 
-    ifstream inf("/home/implication/eclipse-workspace/SpringChallenge2022-main/MyBot/SpiderAttack/data.json");
+    ifstream inf("/home/implication/eclipse-workspace/SpringChallenge2022-main/bot/data.json");
     json j;
     inf >> j;
     inf.close();
@@ -56,10 +56,6 @@ int main()
     while (1) {
     // turn input
         turn += 1;
-        
-
-
-
         
         GM.updateBases(myBase, opBase);
         

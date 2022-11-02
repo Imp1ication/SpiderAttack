@@ -29,7 +29,7 @@ public class Main {
 		
 	// Loop	
 		long totaltime = 0; 
-		for(int i=100, count=0; i<110; ++i, ++count) {
+		for(int i=100, count=0; i<105; ++i, ++count) {
         	System.out.println(count);
         	long time = System.currentTimeMillis();
         	
@@ -70,11 +70,11 @@ public class Main {
 			result_writer.append("Tie!\n");
 		}
   
-		result_writer.append(result.scores.toString() + "\n\n");
-//    		result_writer.append(result.outputs.toString() + "\n");
-//    		result_writer.append(result.errors.toString() + "\n");
-//    		result_writer.append(result.summaries.toString() + "\n");
-//    		result_writer.append(result.gameParameters.toString()); //game seed
+//		result_writer.append(result.scores.toString() + "\n\n");
+//		result_writer.append(result.outputs.toString() + "\n");
+    	result_writer.append(result.errors.toString() + "\n");
+    	result_writer.append(result.summaries.toString() + "\n");
+//    	result_writer.append(result.gameParameters.toString()); //game seed
 		
 		time = System.currentTimeMillis() - time;
 		totaltime += time;

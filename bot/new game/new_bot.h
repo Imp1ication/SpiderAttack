@@ -128,19 +128,25 @@ public:
 
 class Hero : public Entity{
 private:
-	Position patrolPos_[2];
+    const int atkRange_ = 800, windRange_ = 1280, spellRange_ = 2200;
+	
+    Position patrolPos_[2];
     int patrolTar_ = -1;     // -1: error unset, 0: pos1, 1: pos2
+    
+/* Tool function*/
+    Position getCenter(Position x, Position y) const{
+        // TODO: get center
+    }
 public:
 	Hero(int id, int type) : Entity(id, type) {}
 
-	bool inRangeWind(const Position& p) const{ return pos_.distance(p) <= 1280; }
-	bool inRangeShield(const Position& p) const{ return pos_.distance(p) <= 2200; }
-	bool inRangeControl(const Position& p) const{ return pos_.distance(p) <= 2200; }
+	bool inRangeWind(const Position& p) const{ return pos_.distance(p) <= windRange_; }
+	bool inRangeShield(const Position& p) const{ return pos_.distance(p) <= spellRange_; }
+	bool inRangeControl(const Position& p) const{ return pos_.distance(p) <= spellRange_; }
 	
     void setPatrol(Position pos1, Position pos2) { patrolPos_[0] = pos1; patrolPos_[1] = pos2; patrolTar_ = 0; }
 	
 /* Movement */ 
-// TODO: set Patrol system
     void Patrol(std::string msg = ""){
         if(patrolTar_ == -1) {
             printErr("Error: No patrol pos!");
@@ -168,6 +174,21 @@ public:
 	void Shield(Entity target){ std::cout << "SPELL SHIELD " << std::to_string(target.getId()) << std::endl; }
 	void Wait(std::string msg = ""){ std::cout << "WAIT " << msg << std::endl; }
 
+/* Tool function */
+    Position getHuntPos(std::vector<Monster> mons, int tarInd = 0){
+        Position tar(mons[tarInd].getPos());
+        
+        for(int i=0; i < mons.size(); ++i){
+            if(i==tarInd || mons[i].distance(tar)>this->atkRange_*2) continue;
+            
+        // TODO: get center
+                    
+
+
+        }
+
+
+    }
 /* Print stderr message */
     void printErr(std::string msg) const override {
         std::cerr << "Hero " + std::to_string(this->id_) + ": " + msg << std::endl;

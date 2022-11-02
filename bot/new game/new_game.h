@@ -85,8 +85,6 @@ public:
 		return (my.getPos().x() < 1000) ? tar : Position(MAP_WIDTH-tar.x(), MAP_HEIGHT-tar.y());
 	}
 
-/* Threaten related function */
-
 ////////////////////////////////////////////////////
 
 	void getThreatenMons(int side, std::vector<Monster>& mons, std::vector<Monster>& threat){

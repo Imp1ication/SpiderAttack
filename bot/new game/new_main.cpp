@@ -77,12 +77,12 @@ int main()
         // defend
         } else if(GM.getTurn() > GM.getAtkTurn() && myBase.getMana() > GM.getAtkMana()){
         // attack
-        } else if( !nearAtkMons.empty() ){ 
-        // hunt
+        } else if( !nearAtkMons.empty() ){ // hunt
+        // get hunt pos
+            TS.sortByThreaten(nearAtkMons, myThreat);
+
             
-            
-        } else{ 
-        // patrol
+        } else{ // patrol
             atk.Patrol();            
         }
         
