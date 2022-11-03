@@ -15,13 +15,10 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
     // agents compile setting
     	String agent1 = compileCpp("bot/main.cpp", "P1");
-    	String agent2 = compileCpp("bot/main2.cpp", "P2"); 
+    	String agent2 = compileJava("config/Boss.java"); 
     	
     	EAGeneBean gene1 = new EAGeneBean(100, 0f, "P1");
-    	EAGeneBean gene2 = new EAGeneBean(100, 1f, "P2");
-
     	JsonObject jene1 = gene1.getJsonObject();
-    	JsonObject jene2 = gene2.getJsonObject();
 					
     // init data file
         FileWriter result_writer = new FileWriter("bot/result.txt");
@@ -35,32 +32,26 @@ public class Main {
         	
         // write gene data to file
         	FileWriter P1_writer = new FileWriter("bot/data.json");
-        	FileWriter P2_writer = new FileWriter("bot/data2.json");
+
         	P1_writer.flush();
 			P1_writer.write(jene1.toString());
         	P1_writer.close();
-        	
-        	P2_writer.flush();
-        	P2_writer.write(jene2.toString());
-        	P2_writer.close();
         	
 	// init gameRunner
 		MultiplayerGameRunner gameRunner = new MultiplayerGameRunner();
 
 		gameRunner.addAgent(agent1, "Player One");
 		gameRunner.addAgent(agent2, "Player Two");
-		gameRunner.setLeagueLevel(4);
+		gameRunner.setLeagueLevel(3);
 		
 	// get result
 		GameResult result = gameRunner.simulate();
 		result_writer.append("Game " + String.valueOf(count) + "\n");
 		result_writer.append("Gene1: " + jene1 + "\n");
-		result_writer.append("Gene2: " + jene2 + "\n");
 		
 	// result analyze and set new gene
 		if(result.scores.get(0) > result.scores.get(1)) {
 			result_writer.append("Player 1 win!\n");
-			jene2.addProperty("Turn", i+1);
 		}
 		else if(result.scores.get(0) < result.scores.get(1)) {
 			result_writer.append("Player 2 win!\n");
@@ -70,10 +61,10 @@ public class Main {
 			result_writer.append("Tie!\n");
 		}
   
-//		result_writer.append(result.scores.toString() + "\n\n");
+		result_writer.append(result.scores.toString() + "\n\n");
 //		result_writer.append(result.outputs.toString() + "\n");
-    	result_writer.append(result.errors.toString() + "\n");
-    	result_writer.append(result.summaries.toString() + "\n");
+//    	result_writer.append(result.errors.toString() + "\n");
+//    	result_writer.append(result.summaries.toString() + "\n");
 //    	result_writer.append(result.gameParameters.toString()); //game seed
 		
 		time = System.currentTimeMillis() - time;
@@ -86,12 +77,12 @@ public class Main {
 	System.out.println("Total Execution Time: " + totaltime + " ms"); 	
 
 /*
+// run game with launching web server  
     	MultiplayerGameRunner gameRunner = new MultiplayerGameRunner();
     	gameRunner.addAgent(agent1, "Player One");
 		gameRunner.addAgent(agent2, "Player Two");
 		gameRunner.setLeagueLevel(3);
-    	
-// run game with launching web server     
+      
          gameRunner.start();   
       // open browser
          Runtime rt = Runtime.getRuntime();
@@ -115,17 +106,17 @@ private static String compileJava(String botFile) throws IOException, Interrupte
         return "java -cp " + outFolder + " Player";
     }
     
-    private static String compileCpp(String botFile, String playerName) throws IOException, InterruptedException {
-        File outFolder = Files.createTempDir();
-        
-        System.out.println("Compiling Cpp " + botFile);
-        Process compileProcess = Runtime.getRuntime().exec(
-            "g++ " + botFile + " -o " + playerName
-        );
-        compileProcess.waitFor();
-        System.out.println("./"+playerName);
-        return "./" + playerName;
-    }
+private static String compileCpp(String botFile, String playerName) throws IOException, InterruptedException {
+    File outFolder = Files.createTempDir();
+    
+    System.out.println("Compiling Cpp " + botFile);
+    Process compileProcess = Runtime.getRuntime().exec(
+        "g++ " + botFile + " -o " + playerName
+    );
+    compileProcess.waitFor();
+    System.out.println("./"+playerName);
+    return "./" + playerName;
+}
 
 //    private static String compileC(String botFile, String playerName) throws IOException, InterruptedException {
 //        File outFolder = Files.createTempDir();

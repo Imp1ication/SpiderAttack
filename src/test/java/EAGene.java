@@ -11,7 +11,9 @@ public class EAGene {
 	private int atkTurn_, atkMana_;
 	private float defThreat;
 	
-	public EAGene() {
+	public EAGene(String geneJsonFile) {
+        jene_ = new JsonObject();
+
 		
 	}
 	

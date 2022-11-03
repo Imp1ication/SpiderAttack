@@ -80,8 +80,8 @@ int main()
         } else if( !nearAtkMons.empty() ){ // hunt
         // get hunt pos
             TS.sortByThreaten(nearAtkMons, myThreat);
-
-            
+            Position tarPos = atk.getHuntPos(nearAtkMons);
+            atk.Move(tarPos, "Hunt Pos " + tarPos.toString());
         } else{ // patrol
             atk.Patrol();            
         }

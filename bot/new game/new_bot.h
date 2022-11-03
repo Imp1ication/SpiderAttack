@@ -1,7 +1,9 @@
 #ifndef _BOT_H_
 #define _BOT_H_
 
+#include <cmath>
 #include <iostream>
+#include <iterator>
 #include <vector>
 #include <string>
 #include <math.h>
@@ -134,8 +136,13 @@ private:
     int patrolTar_ = -1;     // -1: error unset, 0: pos1, 1: pos2
     
 /* Tool function*/
-    Position getCenter(Position x, Position y) const{
-        // TODO: get center
+    Position getCenter(Position a, Position b) const{
+        Position mid( (a.x() + b.x()) / 2, (a.y() + b.y()) / 2 );
+        double angle = std::atan2(b.y() - a.y(), b.x() - a.x());
+        double len = a.distance(b) / 2.0;
+        double dis = std::sqrt(1.0 - len * len);
+
+        return Position( mid.x() - dis * std::sin(angle), mid.y() + dis * std::cos(angle) );
     }
 public:
 	Hero(int id, int type) : Entity(id, type) {}
@@ -168,7 +175,19 @@ public:
         return;
     }
 
-    void Move(Position p, std::string msg = ""){ std::cout << "MOVE " << p << " " << msg << std::endl;}
+    void Move(Position p, std::string msg = ""){
+        std::cout << "MOVE " << p << " " << "move" << std::endl;
+
+    // build msg
+        std::string log = "Move: " + p.toString();  
+        
+        if(msg != "") { log = log + " // " + msg; }
+        printErr(log);
+
+        return;
+    }
+
+
 	void Wind(Position dir){ std::cout << "SPELL WIND " << dir << std::endl; }
 	void Control(Entity target, Position dir) { std::cout << "SPELL CONTROL " << std::to_string(target.getId()) << " " << dir << std::endl; }
 	void Shield(Entity target){ std::cout << "SPELL SHIELD " << std::to_string(target.getId()) << std::endl; }
@@ -178,16 +197,26 @@ public:
     Position getHuntPos(std::vector<Monster> mons, int tarInd = 0){
         Position tar(mons[tarInd].getPos());
         
+        Position result;
+        int max = 0;
+
         for(int i=0; i < mons.size(); ++i){
             if(i==tarInd || mons[i].distance(tar)>this->atkRange_*2) continue;
             
-        // TODO: get center
-                    
+            Position center = getCenter(tar, mons[i].getPos());
+            int count = 0;
 
+            for(int j=0; j<mons.size(); ++j){
+                if(center.distance(mons[j].getPos()) <= this->atkRange_) ++count;
+            }
 
+            if(count >= max){
+                max = count;
+                result = center;
+            }
         }
 
-
+        return result;
     }
 /* Print stderr message */
     void printErr(std::string msg) const override {
